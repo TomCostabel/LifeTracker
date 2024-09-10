@@ -1,25 +1,31 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
-  parserOptions: {
-    project: 'tsconfig.json',
-    tsconfigRootDir: __dirname,
-    sourceType: 'module',
-  },
-  plugins: ['@typescript-eslint/eslint-plugin'],
   extends: [
-    'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended'
   ],
-  root: true,
-  env: {
-    node: true,
-    jest: true,
+  plugins: ['react'],
+  parserOptions: {
+    ecmaVersion: 2020,
+    sourceType: 'module'
   },
-  ignorePatterns: ['.eslintrc.js'],
+  settings: {
+    react: {
+      version: 'detect'
+    }
+  },
   rules: {
-    '@typescript-eslint/interface-name-prefix': 'off',
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
-  },
+    'semi': ['error', 'always'],
+    'quotes': ['error', 'single'],
+    'react/react-in-jsx-scope': 'off',
+    '@typescript-eslint/no-unused-vars': ['warn'],
+    // Añade otras reglas según lo necesites
+    'indent': ['error', 2], // Verifica la indentación
+    'no-multiple-empty-lines': ['error', { max: 1 }], // Limita líneas vacías
+    // 'max-len': ['error', { code: 160 }], // Limita el ancho de línea
+    'no-trailing-spaces': 'error', // Espacios en blanco al final de la línea
+    'comma-dangle': ['error', 'never'], // No permite comas al final de objetos o arrays
+    'brace-style': ['error', '1tbs'] // Estilo de llaves
+  }
 };
