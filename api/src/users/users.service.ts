@@ -18,7 +18,10 @@ export class UsersService {
       }
       const createdUser = new this.userModal({
         ...newUser,
-        id: uuidv4()
+        id: uuidv4(),
+        finanzasTracker: [],
+        saludTracker: [],
+        notas: []
       });
       return await createdUser.save();
     } catch (error) {
