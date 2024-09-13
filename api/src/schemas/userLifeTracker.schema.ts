@@ -17,6 +17,12 @@ export class UsersLifeTrackerApp {
 
   @Prop({
     required: true,
+    trim: true
+  })
+  id: string;
+
+  @Prop({
+    required: true,
     trim: true,
     type: [{
       mes: { type: String, required: true },
