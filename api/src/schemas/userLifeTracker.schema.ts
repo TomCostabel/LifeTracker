@@ -47,17 +47,44 @@ export class UsersLifeTrackerApp {
     }>
   }> = [];
 
-  // @Prop({
-  //   required: true,
-  //   trim: true
-  // })
-  // saludTracker: string;
+  @Prop({
+    required: true,
+    trim: true,
+    type: [{
+      mes: { type: String, required: true },
+      deporte: [{
+        title: { type: String, require: true },
+        tiempo: { type: String, require: true },
+        id: { type: String, required: true },
+        calorias: { type: String, require: true },
+        fecha: { type: String, require: true }
+      }]
+    }]
+  })
+  saludTracker: Array<{
+    mes: string,
+    deporte: Array<{
+      title: string,
+      tiempo: string,
+      fecha: string,
+      calorias: string,
+      id: string
+    }>
 
-  // @Prop({
-  //   required: true,
-  //   trim: true
-  // })
-  // notas: string;
+  }>;
+
+  @Prop({
+    required: true,
+    trim: true,
+    type: [{
+      title: { type: String, require: true },
+      id: { type: String, require: true }
+    }]
+  })
+  notas: Array<{
+    title: string,
+    id: string
+  }>;
 
 }
 
