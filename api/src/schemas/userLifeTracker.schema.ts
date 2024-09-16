@@ -28,12 +28,12 @@ export class UsersLifeTrackerApp {
       mes: { type: String, required: true },
       egresos: [{
         title: { type: String, require: true },
-        priceEgresos: { type: Number, require: true },
+        priceEgreso: { type: String, require: true },
         id: { type: String, required: true }
       }],
       ingresos: [{
         title: { type: String, require: true },
-        priceIngresos: { type: Number, require: true },
+        priceIngreso: { type: String, require: true },
         id: { type: String, required: true }
       }]
 
@@ -43,12 +43,12 @@ export class UsersLifeTrackerApp {
     mes: string,
     egresos: Array<{
       title: string,
-      priceEgresos: number,
+      priceEgreso: string,
       id: string
     }>,
     ingresos: Array<{
       title: string,
-      priceIngresos: number,
+      priceIngreso: string,
       id: string
     }>
   }> = [];
