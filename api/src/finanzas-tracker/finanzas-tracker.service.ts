@@ -19,7 +19,7 @@ export class FinanzasTrackerService {
     }
     const existingMonth = user.finanzasTracker.find((entry) => entry.mes === CreateIngresoDto.newMes);
 
-    const newIngreso = { title: CreateIngresoDto.title, priceIngreso: CreateIngresoDto.priceIngreso, id: uuidv4() };
+    const newIngreso = { mes: CreateIngresoDto.newMes, title: CreateIngresoDto.title, priceIngreso: CreateIngresoDto.priceIngreso, id: uuidv4() };
 
     if (existingMonth) {
       existingMonth.ingresos.push(newIngreso);
@@ -32,6 +32,7 @@ export class FinanzasTrackerService {
       };
       user.finanzasTracker.push(newEntry);
     }
+    await user.save();
     return user;
   }
 
