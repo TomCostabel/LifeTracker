@@ -16,4 +16,8 @@ export class CreateEgresoDto {
   @IsNotEmpty()
   @IsString()
   priceEgreso: string;
+
+  @IsNotEmpty()
+  @IsString()
+  newMes: string;
 }

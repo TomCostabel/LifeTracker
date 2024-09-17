@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { FinanzasTrackerService } from './finanzas-tracker.service';
 import { CreateIngresoDto } from './dto/create-ingreso.dto';
 import { CreateEgresoDto } from './dto/create-egreso.dto';
@@ -16,13 +16,15 @@ export class FinanzasTrackerController {
     return this.finanzasTrackerService.createEgreso(CreateEgresoDto);
   }
 
-  @Get()
-  findAll() {
-    return this.finanzasTrackerService.findAll();
+  @Post('deleteIngreso')
+  removeIngreso(@Body() body: { ingresoId: string, userId: string, mes: string }) {
+    const { ingresoId, userId, mes } = body;
+    return this.finanzasTrackerService.removeIngreso(ingresoId, userId, mes);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.finanzasTrackerService.remove(+id);
+  @Post('deleteEgreso')
+  removeEgreso(@Body() body: { egresoId: string, userId: string, mes: string }) {
+    const { egresoId, userId, mes } = body;
+    return this.finanzasTrackerService.removeEgreso(egresoId, userId, mes);
   }
 }

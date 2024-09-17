@@ -21,5 +21,4 @@ export class CreateIngresoDto {
   @IsString()
   newMes: string;
 
-
 }

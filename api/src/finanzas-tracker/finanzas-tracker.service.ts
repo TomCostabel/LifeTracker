@@ -36,15 +36,56 @@ export class FinanzasTrackerService {
     return user;
   }
 
-  createEgreso(CreateEgresoDto: CreateEgresoDto) {
-    return 'This action adds a new finanzasTracker';
+  async createEgreso(CreateEgresoDto: CreateEgresoDto) {
+    const user = await this.userModal.findOne({ id: CreateEgresoDto.userId });
+
+    if (!user) {
+      throw new Error('Usuario no encontrado.');
+    }
+    const existingMonth = user.finanzasTracker.find((entry) => entry.mes === CreateEgresoDto.newMes);
+    const newEgreso = { mes: CreateEgresoDto.newMes, title: CreateEgresoDto.title, priceEgreso: CreateEgresoDto.priceEgreso, id: uuidv4() };
+
+    if (existingMonth) {
+      existingMonth.egresos.push(newEgreso);
+    } else {
+      throw new Error('No puedes registrar un egreso de dinero sin antes tener un ingreso.');
+    }
+    await user.save();
+    return user;
   }
 
-  findAll() {
-    return 'This action returns all finanzasTracker';
+  async removeIngreso(ingresoId: string, userId: string, mes: string) {
+
+    const user = await this.userModal.findOne({ id: userId });
+    if (!user) {
+      throw new Error('Usuario no encontrado');
+    }
+    const existingMonth = user.finanzasTracker.find((entry) => entry.mes === mes);
+    if (!existingMonth) {
+      throw new Error('mes inexistente');
+    }
+    if (!existingMonth.ingresos.find((e) => e.id === ingresoId)) {
+      throw new Error('No se encontro ingreso con este ID');
+    }
+    existingMonth.ingresos = existingMonth.ingresos.filter((e) => e.id !== ingresoId);
+    await user.save();
+    return user;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} finanzasTracker`;
+  async removeEgreso(egresoId: string, userId: string, mes: string) {
+    const user = await this.userModal.findOne({ id: userId });
+    if (!user) {
+      throw new Error('Usuario no encontrado');
+    }
+    const existingMonth = user.finanzasTracker.find((entry) => entry.mes === mes);
+    if (!existingMonth) {
+      throw new Error('mes inexistente');
+    }
+    if (!existingMonth.egresos.find((e) => e.id === egresoId)) {
+      throw new Error('No se encontro egreso con este ID');
+    }
+    existingMonth.egresos = existingMonth.egresos.filter((e) => e.id !== egresoId);
+    await user.save();
+    return user;
   }
 }
