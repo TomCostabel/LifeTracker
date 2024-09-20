@@ -62,7 +62,6 @@ export class UsersLifeTrackerApp {
         title: { type: String, require: true },
         tiempo: { type: String, require: true },
         id: { type: String, required: true },
-        calorias: { type: String, require: true },
         fecha: { type: String, require: true }
       }]
     }]
@@ -73,7 +72,6 @@ export class UsersLifeTrackerApp {
       title: string,
       tiempo: string,
       fecha: string,
-      calorias: string,
       id: string
     }>
 
