@@ -1,0 +1,11 @@
+.container-principal {
+  display: flex;
+  background-color: red;
+  height: 700px;
+  width: 1000px;
+}
+
+.container-navbar {
+  background-color: blueviolet;
+  width: 60px;
+}
